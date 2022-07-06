@@ -21,20 +21,13 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    CommentEntity commentEntity;
     Environment env;
     @Autowired
     public CommentController(Environment env){
         this.env = env;
     }
-
-    @Value(("${posco.name}"))
-    String name;
-
-    @GetMapping("test")
-    public String test(){
-        return name;
-    }
-
 
 
     @GetMapping
@@ -43,7 +36,14 @@ public class CommentController {
         return commentService.getAllComment();
     }
 
-    @PostMapping("")
+    @PostMapping("id")
+    public List<CommentEntity> GetAllById(@RequestBody CommentEntity commentEntity){
+
+        commentEntity.setBoardId(commentEntity.getId());
+        return commentService.getAllByboardId(commentEntity.getBoardId());
+    }
+
+    @PostMapping
     public Integer postComm(@RequestBody CommentEntity commentEntity){
         return commentService.insertComment(commentEntity);
     }

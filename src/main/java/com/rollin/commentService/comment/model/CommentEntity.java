@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 @Data
-@Entity(name = "comments")
+@Entity(name = "comment2")
 @Component
 public class CommentEntity {
     @Id
@@ -26,8 +26,14 @@ public class CommentEntity {
     private Integer boardId;
     @Column(name="img")
     private String img;
+    @Column(name="like2")
+    private Integer like2 = 0;
     @Column(name="comment")
     private String comment;
+    @Column(name="ref2")
+    private Integer ref2 = 0;
+    @Column(name="seq")
+    private Integer seq = 0;
     @Column(name="date")
     private LocalDateTime date=LocalDateTime.now();
 }
