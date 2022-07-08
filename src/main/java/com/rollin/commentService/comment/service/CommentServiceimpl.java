@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommentServiceimpl implements CommentService {
@@ -29,6 +30,23 @@ public class CommentServiceimpl implements CommentService {
 
     private Sort sortByvDate() {
         return Sort.by(Sort.Direction.ASC, "ref2");
+    }
+
+
+    public Optional<CommentEntity> loveCount(Integer id, Integer love) {
+        Optional<CommentEntity> comment=commentRepository.findById(id);
+
+
+
+     comment.ifPresent(
+              selectcomments ->{
+           selectcomments.setLike2(love);
+           selectcomments.setDate(selectcomments.getDate().plusDays(1));
+
+           commentRepository.save(selectcomments);
+       });
+
+        return comment;
     }
 
 

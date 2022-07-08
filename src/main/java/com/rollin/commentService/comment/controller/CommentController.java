@@ -48,4 +48,13 @@ public class CommentController {
         return commentService.insertComment(commentEntity);
     }
 
+    @PostMapping("love")
+    public Integer loveComm(@RequestBody CommentEntity commentEntity){
+
+        commentService.loveCount(commentEntity.getId(), commentEntity.getLike2());
+
+        return 1;
+    }
+
+
 }
